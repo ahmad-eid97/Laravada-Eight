@@ -14,7 +14,6 @@ export default {
   },
   methods: {
     switchLang() {
-      console.log('here')
       this.$router.go();
     }
   }
