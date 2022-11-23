@@ -3,7 +3,7 @@
         <div class="row m-0 w-100">
             <app-top-bar class="col-12 topBar"></app-top-bar>
             <b-navbar toggleable="lg">
-                <b-navbar-brand href="#">
+                <b-navbar-brand href="/">
                     <img src="/assets/images/logo.png" alt="logoImage" style="maxWidth: 200px !important">
                 </b-navbar-brand>
 
