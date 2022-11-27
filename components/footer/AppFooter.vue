@@ -34,7 +34,7 @@
                                 </div>
                                 <a href="#">
                                     <font-awesome-icon icon="fa-solid fa-envelope" />
-                                    info@railcoder.com
+                                    {{$store.state.websiteSettings.find(one => one.key === 'email').plain_value}}
                                 </a>
                                 <a href="#">
                                     <font-awesome-icon icon="fa-regular fa-clock" />

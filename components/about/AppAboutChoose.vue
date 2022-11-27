@@ -1,39 +1,34 @@
 <template>
-    <div class="choose-area">
-        <div class="row m-0">
-            <div class="col-lg-6 text">
-                <div class="choose-content mr-20">
-                    <div class="section-title">
-                        <span class="sp-color1">Why Choose Us</span>
-                        <h2>We Provide Truly Prominent It Solutions.</h2>
-                        <p>
-                        Aenean sollicitudin, lorem quis bibendum auctor, nisi elit consequat ipsum, nec sagittis sem nibh id elit. Duis sed odio sit amet nibh vulputate cursus a sit amet mauris. Morbi accumsan ipsum auctor a ornare odio.
-                        </p>
-                    </div>
-                    <div class="row">
-                        <div class="col-lg-6 col-6">
-                            <div class="choose-content-card">
-                                <div class="content">
-                                    <font-awesome-icon icon="fa-solid fa-hand-holding-hand" />
-                                    <h3>Experience</h3>
-                                </div>
-                                <p>Neque porro quisquam est qui dolorem ipsum quia dolor sit amet</p>
-                            </div>
+    <div class="choose-area pt-100 pb-70">
+        <div class="container">
+            <div class="row align-items-center">
+                <div class="col-lg-6">
+                    <div class="choose-content mr-20">
+                        <div class="section-title">
+                            <span class="sp-color1">{{whySection.find(one => one.key === 'why_choose_us_title').value}}</span>
+                            <h2>{{whySection.find(one => one.key === 'why_choose_us_sub_title').value}}</h2>
+                            <p>
+                                {{whySection.find(one => one.key === 'why_choose_us_description').value}}
+                            </p>
                         </div>
-                        <div class="col-lg-6 col-6">
-                            <div class="choose-content-card">
-                                <div class="content">
-                                    <font-awesome-icon icon="fa-solid fa-circle-question" />
-                                    <h3>Quick Support</h3>
+                        <div class="row">
+                            <div v-for="item in whySection.find(one => one.key === 'why_choose_us_list').value" :key="item" class="col-lg-6 col-6">
+                                <div class="choose-content-card">
+                                    <div class="content">
+                                        <font-awesome-icon :icon="item.icon" />
+                                        <h3>{{item.title}}</h3>
+                                    </div>
+                                    <p>{{item.description}}</p>
                                 </div>
-                                <p>Neque porro quisquam est qui dolorem ipsum quia dolor sit amet</p>
                             </div>
                         </div>
                     </div>
                 </div>
-            </div>
-            <div class="col-6 image">
-                <div class="overlay"></div>
+                <div class="col-lg-6">
+                    <div class="choose-img">
+                        <img :src="whySection.find(one => one.key === 'why_choose_us_image').value" alt="Images">
+                    </div>
+                </div>
             </div>
         </div>
     </div>
@@ -41,32 +36,14 @@
 
 <script>
 export default {
-    name: 'AppAboutChoose'
+    name: 'AppAboutChoose',
+    props: ["whySection"]
 }
 </script>
 
 <style>
 .choose-area {
-    background-color: #f5f5f5;
-}
-.choose-area .text {
-    padding: 120px 60px;
-}
-.choose-area .image {
-    background-image: url(https://the7.io/elementor-business/wp-content/uploads/sites/89/2020/02/img001-25-1.jpg);
-    position: relative;
-    background-position-x: 50%;
-    background-position-y: 50%;
-    background-size: cover;
-    box-sizing: border-box;
-}
-.choose-area .image .overlay {
-  background-image: linear-gradient(270deg,transparent 50%,#f5f5f5);
-  position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
+    background-color: var(--main-color);
 }
 .choose-area .choose-content {
     margin-bottom: 30px;
@@ -82,14 +59,14 @@ export default {
     margin-bottom: 8px;
     font-weight: 600;
     display: block;
-    color:#222;
+    color:#fff;
 }
 .choose-content .section-title h2 {
-    color: #222;
-    font-size: 36px;
-    font-weight: 600;
-    line-height: 43.2px;
-    padding: 0 0 30px;
+    color: #fff;
+    font-size: 35px;
+    font-weight: 800;
+    letter-spacing: -1px;
+    line-height: 42px;
     text-align: left;
     margin-top: 10px;
     margin-right: 0px;
@@ -97,7 +74,7 @@ export default {
     margin-left: 0px;
 }
 .choose-area .choose-content .section-title p {
-    color: #222;
+    color: #fff;
     padding-top: 10px;
     margin-bottom: 0;
     max-width: 530px;
@@ -115,20 +92,20 @@ export default {
     top: 10px;
     left: 0;
     font-size: 60px;
-    color:var(--main-color);
+    color:#fff;
     line-height: 1;
 }
 .choose-area .choose-content .choose-content-card .content h3 {
     margin-top: 10px;
     margin-bottom: 30px;
-    font-weight: 600;
-    color: #222;
+    font-weight: 800;
+    color: #fff;
     font-size: 22px;
 }
 .choose-area .choose-content .choose-content-card p {
     margin-top: 5px;
     margin-bottom: 0;
-    color: #222;
+    color: #fff;
 }
 .choose-area .choose-img {
     margin-bottom: 30px;
