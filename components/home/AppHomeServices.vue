@@ -4,74 +4,20 @@
             <h2>Services we offer</h2>
         </div>
         <div class="row m-0">
-            <div class="col-md-12 col-lg-6 mb-5">
+            <div v-for="service in services.slice(0, 4)" :key="service.id" class="col-md-12 col-lg-6 mb-5">
                 <div class="item">
                     <div class="row m-0 justify-content-center">
                         <div class="col-auto">
                             <div class="image">
-                                <img src="https://the7.io/elementor-business/wp-content/uploads/sites/89/2020/02/img001-1-1.jpg" alt="">
+                                <img :src="service.image" :alt="service.title">
                             </div>
                         </div>
                         <div class="col">
-                            <h4>Accounting services</h4>
+                            <h4>{{services.title}}</h4>
                             <p>
-                                Ut sit amet semper arcu. Proin eget ex viverra lorem pretium. Morbi dapibus a tellus at euismod. Ut sit amet semper!
+                                {{service.short_description}}
                             </p>
-                            <a href="#" class="btn">Details</a>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="col-md-12 col-lg-6 mb-5">
-                <div class="item">
-                    <div class="row m-0 justify-content-center">
-                        <div class="col-auto">
-                            <div class="image">
-                                <img src="https://the7.io/elementor-business/wp-content/uploads/sites/89/2020/02/img001-6-1.jpg" alt="">
-                            </div>
-                        </div>
-                        <div class="col">
-                            <h4>Project management</h4>
-                            <p>
-                                Ut sit amet semper arcu – dolor proin eget ex convallis eu viverra lorem pretium. Morbi dapibus a euismod lorem ipsum dolor.
-                            </p>
-                            <a href="#" class="btn">Details</a>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="col-md-12 col-lg-6 mb-5">
-                <div class="item">
-                    <div class="row m-0 justify-content-center">
-                        <div class="col-auto">
-                            <div class="image">
-                                <img src="https://the7.io/elementor-business/wp-content/uploads/sites/89/2020/01/img001-8-1.jpg" alt="">
-                            </div>
-                        </div>
-                        <div class="col">
-                            <h4>Networks & communications</h4>
-                            <p>
-                                Ut sit amet semper arcu. Proin eget ex convallis eu viverra lorem pretium. Morbi dapibus a tellus.
-                            </p>
-                            <a href="#" class="btn">Details</a>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="col-md-12 col-lg-6 mb-5">
-                <div class="item">
-                    <div class="row m-0 justify-content-center">
-                        <div class="col-auto">
-                            <div class="image">
-                                <img src="https://the7.io/elementor-business/wp-content/uploads/sites/89/2020/02/img001-25-1.jpg" alt="">
-                            </div>
-                        </div>
-                        <div class="col">
-                            <h4>B2B Solutions</h4>
-                            <p>
-                                Ut sit amet arcu – dolor proin eget ex convallis eu viverra lorem pretium. Morbi dapibus at euismod lorem ipsum dolor.
-                            </p>
-                            <a href="#" class="btn">Details</a>
+                            <nuxt-link :to="`/service/${service.id}`" class="btn">Details</nuxt-link>
                         </div>
                     </div>
                 </div>
@@ -84,6 +30,7 @@
 
 export default {
     name: 'AppHomeServices',
+    props: ["services"],
     data() {
         return {
             

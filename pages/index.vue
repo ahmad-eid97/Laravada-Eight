@@ -6,13 +6,13 @@
         
         <app-home-feature></app-home-feature>
 
-        <app-home-services></app-home-services>
+        <app-home-services :services="services"></app-home-services>
         <app-home-contact-divider></app-home-contact-divider>
         <app-home-principles></app-home-principles>
         <app-home-cases></app-home-cases>
         <app-home-achievements></app-home-achievements>
         <app-home-why></app-home-why>
-        <app-home-blogs></app-home-blogs>
+        <app-home-blogs :blogs="blogs"></app-home-blogs>
         <app-home-contact-divider-bottom></app-home-contact-divider-bottom>
         <!-- <app-home-testimonials></app-home-testimonials> -->
 
@@ -50,6 +50,19 @@ import AppHomeWhy from '../components/home/AppHomeWhy.vue'
 
 export default {
   name: 'Home',
+  async asyncData({ $axios }) {
+    const sliderData = await $axios.get('/sliders');
+
+    const services = await $axios.get('/services');
+
+    const blogs = await $axios.get('/blogs?latest=1');
+
+    return {
+      sliderData: sliderData.data.data.sliders,
+      services: services.data.data.services,
+      blogs: blogs.data.data.blogs
+    }
+  },
   components: {
     AppHomeSlider,
     AppHomeFeature,
@@ -65,12 +78,5 @@ export default {
     AppHomeAchievements,
     AppHomeContactDividerBottom
   },
-  async asyncData({ $axios }) {
-    const sliderData = await $axios.get('/sliders');
-
-    return {
-      sliderData: sliderData.data.data.sliders
-    }
-  }
 }
 </script>

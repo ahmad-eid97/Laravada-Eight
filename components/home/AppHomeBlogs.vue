@@ -5,87 +5,17 @@
         </div>
         <div class="row">
             <swiper :options="swiperOption">
-                <swiper-slide>
+                <swiper-slide v-for="blog in blogs" :key="blog.id">
                     <div class="item">
                         <div class="image">
-                            <img class="img-fluid" src="https://the7.io/elementor-business/wp-content/uploads/sites/89/2020/02/img001-0-1.jpg" alt="">
+                            <img class="img-fluid" :src="blog.image" :alt="blog.title">
                         </div>
-                        <h5><a href="#">Amet tincidunt elit habitant morbi tristique</a></h5>
+                        <h5><a href="#">{{blog.title}}</a></h5>
                         <p>
-                            <span><a href="#">Company</a>,<a href="#">Technology</a></span>
-                            <span><a href="#"> - 5 February 2020</a></span>
+                            <span><a href="#">{{blog.username}}</a>,<a href="#">Technology</a></span>
+                            <span><a href="#">{{blog.publish_date}}</a></span>
                         </p>
-                        <a href="#" class="btn">Read article</a>
-                    </div>
-                </swiper-slide>
-
-                <swiper-slide>
-                    <div class="item">
-                        <div class="image">
-                            <img class="img-fluid" src="https://the7.io/elementor-business/wp-content/uploads/sites/89/2020/02/img001-1-1.jpg" alt="">
-                        </div>
-                        <h5><a href="#">Maecenas sit – amet tincidunt habitant morbi dolor</a></h5>
-                        <p>
-                            <span><a href="#">Company</a></span>
-                            <span><a href="#"> - 5 February 2020</a></span>
-                        </p>
-                        <a href="#" class="btn">Read article</a>
-                    </div>
-                </swiper-slide>
-
-                <swiper-slide>
-                    <div class="item">
-                        <div class="image">
-                            <img class="img-fluid" src="https://the7.io/elementor-business/wp-content/uploads/sites/89/2020/02/img001-2-1.jpg" alt="">
-                        </div>
-                        <h5><a href="#">Nunc ut – for dictum purus lorem malesuada famesla</a></h5>
-                        <p>
-                            <span><a href="#">Business</a></span>
-                            <span><a href="#"> - 5 February 2020</a></span>
-                        </p>
-                        <a href="#" class="btn">Read article</a>
-                    </div>
-                </swiper-slide>
-
-                <swiper-slide>
-                    <div class="item">
-                        <div class="image">
-                            <img class="img-fluid" src="https://the7.io/elementor-business/wp-content/uploads/sites/89/2020/02/img001-5-1.jpg" alt="">
-                        </div>
-                        <h5><a href="#">Pellen lorem: tesque habitant morbi tristique</a></h5>
-                        <p>
-                            <span><a href="#">Technology</a></span>
-                            <span><a href="#"> - 5 February 2020</a></span>
-                        </p>
-                        <a href="#" class="btn">Read article</a>
-                    </div>
-                </swiper-slide>
-
-                <swiper-slide>
-                    <div class="item">
-                        <div class="image">
-                            <img class="img-fluid" src="https://the7.io/elementor-business/wp-content/uploads/sites/89/2020/01/img001-8-1.jpg" alt="">
-                        </div>
-                        <h5><a href="#">Pellentesque habitant morbi tristique</a></h5>
-                        <p>
-                            <span><a href="#">Company</a></span>
-                            <span><a href="#"> - 24 August 2019</a></span>
-                        </p>
-                        <a href="#" class="btn">Read article</a>
-                    </div>
-                </swiper-slide>
-
-                <swiper-slide>
-                    <div class="item">
-                        <div class="image">
-                            <img class="img-fluid" src="https://the7.io/elementor-business/wp-content/uploads/sites/89/2020/02/img001-9-1.jpg" alt="">
-                        </div>
-                        <h5><a href="#">Netus et malesuada – fames nulla from ac turpis egestas</a></h5>
-                        <p>
-                            <span><a href="#">Business</a>,<a href="#">Technology</a></span>
-                            <span><a href="#"> - 5 May 2018</a></span>
-                        </p>
-                        <a href="#" class="btn">Read article</a>
+                        <nuxt-link :to="`/blog/${blog.id}`" class="btn">Read article</nuxt-link>
                     </div>
                 </swiper-slide>
             </swiper>
@@ -96,6 +26,7 @@
 <script>
 export default {
     name: 'AppHomeBlogs',
+    props: ["blogs"],
     data() {
         return {
             swiperOption: {
@@ -159,6 +90,11 @@ export default {
         max-height: 237.6px;
         position: relative;
         margin-bottom: 30px;
+    }
+    
+    .blogs .item .image img {
+        height: 300px;
+        width: 100%;
     }
     .blogs .item .image:after {
         content: '';
