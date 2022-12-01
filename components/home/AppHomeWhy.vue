@@ -1,37 +1,16 @@
 <template>
   <section class="testimonials">
         <div class="row mb-3">
-            <h2>Why choose our company</h2>
+            <h2>{{whyUs.find(one => one.key === 'why_choose_us_title').value}}</h2>
         </div>
         <div class="row">
             <div class="col-lg-8">
                 <div class="row m-0 h-100">
-                    <div class="col-md-6 item">
-                        <font-awesome-icon icon="fa-solid fa-user-tie" />
-                        <h4>Brilliant team</h4>
+                    <div v-for="item in whyUs.find(one => one.key === 'why_choose_us_list').value" :key="item" class="col-md-6 item">
+                        <font-awesome-icon :icon="item.icon" />
+                        <h4>{{item.title}}</h4>
                         <p>
-                            Maecenas gravida lacus luctus nec tique eget sed, viverra at sapiengravid nec dolor suscipit ristique eget - malesuada sed viverra.
-                        </p>
-                    </div>
-                    <div class="col-md-6 item">
-                        <font-awesome-icon icon="fa-solid fa-arrows-rotate" />
-                        <h4>Rich experience</h4>
-                        <p>
-                            Dolor sit amet - onsectetur adipiscing elit. Ut elit tellus, luctus nec ullamcorper mattis, pulvinar dapibus glavrida.
-                        </p>
-                    </div>
-                    <div class="col-md-6 item">
-                        <font-awesome-icon icon="fa-solid fa-life-ring" />
-                        <h4>24/7 online support</h4>
-                        <p>
-                            Nullam arcu onsectetur adipiscing elit. Ut elit tellus, luctus nec tique eget sed, viverra at sapiengravida lacus nec dolor suscipit faucibus.
-                        </p>
-                    </div>
-                    <div class="col-md-6 item">
-                        <font-awesome-icon icon="fa-solid fa-dollar-sign" />
-                        <h4>Affordable prices</h4>
-                        <p>
-                            Etiam sit amet viverra at sapiengravid nec dolor suscipit convallis erat. Class aptent taciti sociosqu ad litora torquent per conubia!
+                            {{item.description}}
                         </p>
                     </div>
                 </div>
@@ -57,6 +36,7 @@
 
 export default {
     name: 'AppHometestimonials',
+    props: ["whyUs"],
     components: {},
     data() {
         return {

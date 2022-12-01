@@ -3,62 +3,12 @@
         <div class="container">
             <div class="row gy-4 justify-content-center">
 
-                <div class="col">
+                <div v-for="feature in features.find(one => one.key === 'features_text_list').value.slice(0, 5)" :key="feature" class="col">
                     <div class="item ">
-                        <font-awesome-icon icon="fa-solid fa-rocket" />
+                        <font-awesome-icon :icon="feature.icon" />
                         <div class="content">
                             <h6 class="reward-h6">
-                                 Innovative approach 
-                            </h6>
-                        </div>
-                    </div>
-                </div>
-                <div class="col">
-                    <div class="item ">
-                        <font-awesome-icon icon="fa-solid fa-user-tie" />
-                        <div class="content">
-                            <h6 class="reward-h6">
-                                 Top industry specialists
-                            </h6>
-                        </div>
-                    </div>
-                </div>
-                <div class="col">
-                    <div class="item ">
-                        <font-awesome-icon icon="fa-solid fa-list-check" />
-                        <div class="content">
-                            <h6 class="reward-h6">
-                                 Perfect timing
-                            </h6>
-                        </div>
-                    </div>
-                </div>
-                <div class="col">
-                    <div class="item ">
-                        <font-awesome-icon icon="fa-solid fa-headset" />
-                        <div class="content">
-                            <h6 class="reward-h6">
-                                 24/7 Customer support 
-                            </h6>
-                        </div>
-                    </div>
-                </div>
-                <div class="col">
-                    <div class="item ">
-                        <font-awesome-icon icon="fa-solid fa-dollar-sign" />
-                        <div class="content">
-                            <h6 class="reward-h6">
-                                 Reasonable prices
-                            </h6>
-                        </div>
-                    </div>
-                </div>
-                <div class="col">
-                    <div class="item ">
-                        <font-awesome-icon icon="fa-solid fa-award" />
-                        <div class="content">
-                            <h6 class="reward-h6">
-                                 Money back guarantee 
+                                 {{feature.title}}
                             </h6>
                         </div>
                     </div>
@@ -73,6 +23,7 @@
 
 export default {
     name: 'AppHomeFeature',
+    props: ["features"],
     components: {},
     data() {
         return {

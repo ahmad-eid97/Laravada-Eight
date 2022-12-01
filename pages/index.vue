@@ -4,14 +4,14 @@
         <app-home-slider :sliderData="sliderData"></app-home-slider>
         <!-- Slick Section End -->
         
-        <app-home-feature></app-home-feature>
+        <app-home-feature :features="features"></app-home-feature>
 
         <app-home-services :services="services"></app-home-services>
         <app-home-contact-divider></app-home-contact-divider>
         <app-home-principles></app-home-principles>
         <app-home-cases></app-home-cases>
-        <app-home-achievements></app-home-achievements>
-        <app-home-why></app-home-why>
+        <app-home-achievements :counter="counter"></app-home-achievements>
+        <app-home-why :whyUs="whyUs"></app-home-why>
         <app-home-blogs :blogs="blogs"></app-home-blogs>
         <app-home-contact-divider-bottom></app-home-contact-divider-bottom>
         <!-- <app-home-testimonials></app-home-testimonials> -->
@@ -53,12 +53,21 @@ export default {
   async asyncData({ $axios }) {
     const sliderData = await $axios.get('/sliders');
 
+    const features = await $axios.get('/sections/features');
+
+    const counter = await $axios.get('/sections/counter_success');
+
+    const whyUs = await $axios.get('/sections/why_choose_us');
+
     const services = await $axios.get('/services');
 
     const blogs = await $axios.get('/blogs?latest=1');
 
     return {
       sliderData: sliderData.data.data.sliders,
+      features: features.data.data,
+      counter: counter.data.data,
+      whyUs: whyUs.data.data,
       services: services.data.data.services,
       blogs: blogs.data.data.blogs
     }

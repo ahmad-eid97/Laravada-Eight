@@ -10,47 +10,14 @@
                </p>
                <div class="form">
                    <div class="row m-0">
-                        <div class="col-6 item" style="padding-left: 0">
+                        <div v-for="item in counter.find(one => one.key === 'counter_success_list').value" :key="item" class="col-6 item" style="padding-left: 0">
                             <div class="row m-0">
                                 <div class="col-auto p-0">
-                                    <font-awesome-icon icon="fa-regular fa-calendar-check" />
+                                    <font-awesome-icon :icon="item.title" />
                                 </div>
                                 <div class="col" style="padding-left: 0">
-                                    <h4>20+</h4>
-                                    <p>Years in business</p>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-6 item" style="padding-left: 0">
-                            <div class="row m-0">
-                                <div class="col-auto p-0">
-                                    <font-awesome-icon icon="fa-solid fa-user-group" />
-                                </div>
-                                <div class="col" style="padding-left: 0">
-                                    <h4>30</h4>
-                                    <p>Top specialists</p>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-6 item" style="padding-left: 0">
-                            <div class="row m-0">
-                                <div class="col-auto p-0">
-                                    <font-awesome-icon icon="fa-solid fa-briefcase" />
-                                </div>
-                                <div class="col" style="padding-left: 0">
-                                    <h4> 250+</h4>
-                                    <p>Completed projects</p>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-6 item" style="padding-left: 0">
-                            <div class="row m-0">
-                                <div class="col-auto p-0">
-                                    <font-awesome-icon icon="fa-solid fa-medal" />
-                                </div>
-                                <div class="col" style="padding-left: 0">
-                                    <h4>38</h4>
-                                    <p>Industry awards</p>
+                                    <h4>{{item.counter}}+</h4>
+                                    <p>{{item.title}}</p>
                                 </div>
                             </div>
                         </div>
@@ -70,6 +37,7 @@
 
 export default {
     name: 'AppHomeAchievements',
+    props: ["counter"],
     components: {},
     data() {
         return {

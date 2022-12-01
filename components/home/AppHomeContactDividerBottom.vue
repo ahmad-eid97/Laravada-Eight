@@ -7,7 +7,7 @@
                </h3>
                <p>
                    <font-awesome-icon icon="fa-solid fa-phone" />
-                   1 (234) 567-891
+                   {{$store.state.websiteSettings.find(one => one.key === 'contact_phone').value}}
                </p>
                <a href="#" class="btn">
                     <font-awesome-icon icon="fa-solid fa-comment-dollar" />
