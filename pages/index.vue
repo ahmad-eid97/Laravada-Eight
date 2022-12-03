@@ -1,67 +1,68 @@
 <template>
   <div class="home">
-        <!-- Slick Section Start -->
-        <app-home-slider :sliderData="sliderData"></app-home-slider>
-        <!-- Slick Section End -->
-        
-        <app-home-feature :features="features"></app-home-feature>
+    <!-- Slick Section Start -->
+    <app-home-slider :sliderData="sliderData"></app-home-slider>
+    <!-- Slick Section End -->
 
-        <app-home-services :services="services"></app-home-services>
-        <app-home-contact-divider></app-home-contact-divider>
-        <app-home-principles></app-home-principles>
-        <app-home-cases></app-home-cases>
-        <app-home-achievements :counter="counter"></app-home-achievements>
-        <app-home-why :whyUs="whyUs"></app-home-why>
-        <app-home-blogs :blogs="blogs"></app-home-blogs>
-        <app-home-contact-divider-bottom></app-home-contact-divider-bottom>
-        <!-- <app-home-testimonials></app-home-testimonials> -->
+    <app-home-feature :features="features"></app-home-feature>
 
+    <app-home-services :services="services"></app-home-services>
+    <app-home-contact-divider></app-home-contact-divider>
+    <app-home-principles></app-home-principles>
+    <app-home-cases></app-home-cases>
+    <app-home-achievements :counter="counter"></app-home-achievements>
+    <app-home-why :whyUs="whyUs"></app-home-why>
+    <app-home-blogs :blogs="blogs"></app-home-blogs>
+    <app-home-contact-divider-bottom
+      :bottomBanner="bottomBanner"
+    ></app-home-contact-divider-bottom>
+    <!-- <app-home-testimonials></app-home-testimonials> -->
 
-        <!-- WHY WORK WITH US Start -->
-        <!-- WHY WORK WITH US End -->
+    <!-- WHY WORK WITH US Start -->
+    <!-- WHY WORK WITH US End -->
 
+    <!-- testimonials Section Start -->
+    <!-- testimonials Section End -->
 
-        <!-- testimonials Section Start -->
-        <!-- testimonials Section End -->
+    <!-- <app-home-news></app-home-news> -->
 
-        <!-- <app-home-news></app-home-news> -->
-
-        <!-- Services Section Start -->
-        <!-- <app-home-services-offers></app-home-services-offers> -->
+    <!-- Services Section Start -->
+    <!-- <app-home-services-offers></app-home-services-offers> -->
   </div>
 </template>
 
 <script>
-import AppHomeAchievements from '../components/home/AppHomeAchievements.vue'
-import AppHomeBlogs from '../components/home/AppHomeBlogs.vue'
-import AppHomeCases from '../components/home/AppHomeCases.vue'
-import AppHomeContactDivider from '../components/home/AppHomeContactDivider.vue'
-import AppHomeContactDividerBottom from '../components/home/AppHomeContactDividerBottom.vue'
-import AppHomeFeature from '../components/home/AppHomeFeature.vue'
+import AppHomeAchievements from "../components/home/AppHomeAchievements.vue";
+import AppHomeBlogs from "../components/home/AppHomeBlogs.vue";
+import AppHomeCases from "../components/home/AppHomeCases.vue";
+import AppHomeContactDivider from "../components/home/AppHomeContactDivider.vue";
+import AppHomeContactDividerBottom from "../components/home/AppHomeContactDividerBottom.vue";
+import AppHomeFeature from "../components/home/AppHomeFeature.vue";
 // import AppHomeNews from '../components/home/AppHomeNews.vue'
-import AppHomePrinciples from '../components/home/AppHomePrinciples.vue'
-import AppHomeServices from '../components/home/AppHomeServices.vue'
+import AppHomePrinciples from "../components/home/AppHomePrinciples.vue";
+import AppHomeServices from "../components/home/AppHomeServices.vue";
 // import AppHomeServicesOffers from '../components/home/AppHomeServicesOffers.vue'
-import AppHomeSlider from '../components/home/AppHomeSlider.vue'
+import AppHomeSlider from "../components/home/AppHomeSlider.vue";
 // import AppHomeTestimonials from '../components/home/AppHomeTestimonials.vue'
-import AppHomeWhy from '../components/home/AppHomeWhy.vue'
+import AppHomeWhy from "../components/home/AppHomeWhy.vue";
 // @ is an alias to /src
 
-
 export default {
-  name: 'Home',
+  name: "Home",
   async asyncData({ $axios }) {
-    const sliderData = await $axios.get('/sliders');
+    const sliderData = await $axios.get("/sliders");
 
-    const features = await $axios.get('/sections/features');
+    const features = await $axios.get("/sections/features");
 
-    const counter = await $axios.get('/sections/counter_success');
+    const counter = await $axios.get("/sections/counter_success");
 
-    const whyUs = await $axios.get('/sections/why_choose_us');
+    const whyUs = await $axios.get("/sections/why_choose_us");
 
-    const services = await $axios.get('/services');
+    const services = await $axios.get("/services");
 
-    const blogs = await $axios.get('/blogs?latest=1');
+    const blogs = await $axios.get("/blogs?latest=1");
+
+    const bottomBanner = await $axios.get("/sections/banner-bottom");
 
     return {
       sliderData: sliderData.data.data.sliders,
@@ -69,8 +70,9 @@ export default {
       counter: counter.data.data,
       whyUs: whyUs.data.data,
       services: services.data.data.services,
-      blogs: blogs.data.data.blogs
-    }
+      blogs: blogs.data.data.blogs,
+      bottomBanner: bottomBanner.data.data,
+    };
   },
   components: {
     AppHomeSlider,
@@ -85,7 +87,7 @@ export default {
     AppHomePrinciples,
     AppHomeCases,
     AppHomeAchievements,
-    AppHomeContactDividerBottom
+    AppHomeContactDividerBottom,
   },
-}
+};
 </script>
