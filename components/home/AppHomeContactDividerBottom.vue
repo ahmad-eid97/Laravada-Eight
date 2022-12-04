@@ -8,7 +8,7 @@
           }}
         </h3>
         <p>
-          <font-awesome-icon icon="fa-solid fa-phone" />
+          <i class="fa-solid fa-phone"></i>
           {{
             $store.state.websiteSettings.find(
               (one) => one.key === "contact_phone"
@@ -21,7 +21,7 @@
           "
           class="btn"
         >
-          <font-awesome-icon icon="fa-solid fa-comment-dollar" />
+          <i class="fa-solid fa-comment-dollar"></i>
           Request for quote online
         </a>
       </div>
@@ -119,7 +119,7 @@ export default {
   justify-content: center;
   border: none;
 }
-.contact-divider-2 .btn svg {
+.contact-divider-2 .btn i {
   margin-right: 12px;
 }
 .contact-divider-2 .btn:hover {
