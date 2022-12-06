@@ -8,7 +8,9 @@
           the ones that do.
         </p>
         <div class="form">
-          <div class="row m-0">
+          <div class="row m-0" v-if="counter.find(
+                (one) => one.key === 'counter_success_list'
+              ).value">
             <div
               v-for="item in counter.find(
                 (one) => one.key === 'counter_success_list'

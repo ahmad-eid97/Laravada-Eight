@@ -7,7 +7,10 @@
     </div>
     <div class="row">
       <div class="col-lg-8">
-        <div class="row m-0 h-100">
+        <div
+          class="row m-0 h-100"
+          v-if="whyUs.find((one) => one.key === 'why_choose_us_list').value"
+        >
           <div
             v-for="item in whyUs.find((one) => one.key === 'why_choose_us_list')
               .value"
