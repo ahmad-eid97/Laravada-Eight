@@ -113,6 +113,7 @@ export default {
 .projects-col .thumb img {
   border-radius: 0;
   width: 100%;
+  height: 250px;
 }
 .projects-col .content {
   padding: 0 30px 30px;

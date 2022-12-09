@@ -167,7 +167,7 @@ export default {
   font-size: 22px;
   font-weight: 600;
   line-height: 28.6px;
-  text-align: left;
+  /* text-align: left; */
 }
 .testimonials .item p {
   color: rgb(102, 102, 102);
@@ -175,6 +175,6 @@ export default {
   font-weight: 400;
   line-height: 27.2px;
   margin-top: 15px;
-  text-align: left;
+  /* text-align: left; */
 }
 </style>
