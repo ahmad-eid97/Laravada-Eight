@@ -1,79 +1,149 @@
 <template>
-    <div class="user-area pt-100 pb-70">
-        <div class="container">
-            <div class="row align-items-center">
-                <div class="col-lg-6">
-                    <div class="user-img">
-                        <img src="/assets/images/user-img.jpg" alt="Images">
-                    </div>
-                </div>
-                <div class="col-lg-6">
-                    <div class="user-form">
-                        <div class="contact-form">
-                            <h2>Log In</h2>
-                            <form>
-                                <div class="row">
-                                    <div class="col-lg-12 ">
-                                        <div class="form-group">
-                                            <input type="text" class="form-control" required="" data-error="Please enter your Username or Email" placeholder="Username or Email" v-model="email">
-                                        </div>
-                                    </div>
-                                    <div class="col-12">
-                                        <div class="form-group">
-                                            <input class="form-control" type="password" name="password" placeholder="Password" v-model="password">
-                                        </div>
-                                    </div>
-                                    <div class="col-lg-12 form-condition">
-                                        <div class="agree-label">
-                                            <input type="checkbox" id="chb1">
-                                            <label for="chb1">
-                                            Remember Me 
-                                                <router-link to="forget" class="forget">Forgot My Password?</router-link>
-                                            </label>
-                                        </div>
-                                    </div>
-                                    <div class="col-lg-12 ">
-                                        <button type="button" class="default-btn btn-bg-two" @click="login">
-                                            Log In Now
-                                        </button>
-                                    </div>
-                                    <div class="col-12">
-                                        <p class="account-desc">
-                                            Not a Member?
-                                            <router-link to="register">Register Now</router-link>
-                                        </p>
-                                    </div>
-                                </div>
-                            </form>
-                        </div>
-                    </div>
-                </div>
-            </div>
+  <div class="user-area pt-100 pb-70">
+    <div class="container">
+      <div class="row align-items-center">
+        <div class="col-lg-6">
+          <div class="user-img">
+            <img src="/assets/images/user-img.jpg" alt="Images" />
+          </div>
         </div>
+        <div class="col-lg-6">
+          <div class="user-form">
+            <div class="contact-form">
+              <h2>Log In</h2>
+              <form>
+                <div class="row">
+                  <div class="col-lg-12">
+                    <div class="form-group">
+                      <input
+                        type="email"
+                        class="form-control"
+                        :class="
+                          (emptyError && !email) || !validEmail
+                            ? 'errorInput'
+                            : ''
+                        "
+                        data-error="Please enter your Username or Email"
+                        placeholder="Your Email"
+                        v-model="email"
+                        @change="typingEmail"
+                      />
+                      <span v-if="emptyError && !email" class="errorHint"
+                        >Field is required</span
+                      >
+                      <span v-if="!validEmail && email" class="errorHint"
+                        >Email is invalid</span
+                      >
+                    </div>
+                  </div>
+                  <div class="col-12">
+                    <div class="form-group">
+                      <input
+                        class="form-control"
+                        :class="emptyError && !password ? 'errorInput' : ''"
+                        type="password"
+                        name="password"
+                        placeholder="Password"
+                        v-model="password"
+                      />
+                      <span v-if="emptyError && !password" class="errorHint"
+                        >Field is required</span
+                      >
+                    </div>
+                  </div>
+                  <div class="col-lg-12 form-condition">
+                    <div class="agree-label">
+                      <input type="checkbox" id="chb1" />
+                      <label for="chb1">
+                        Remember Me
+                        <router-link to="forget" class="forget"
+                          >Forgot My Password?</router-link
+                        >
+                      </label>
+                    </div>
+                  </div>
+                  <div class="col-lg-12">
+                    <button
+                      type="button"
+                      class="default-btn btn-bg-two"
+                      @click="login"
+                    >
+                      Log In Now
+                    </button>
+                  </div>
+                  <div class="col-12">
+                    <p class="account-desc">
+                      Not a Member?
+                      <router-link to="register">Register Now</router-link>
+                    </p>
+                  </div>
+                </div>
+              </form>
+            </div>
+          </div>
+        </div>
+      </div>
     </div>
+  </div>
 </template>
 
 <script>
-export default {
-    name: 'AppLoginForm',
-    data() {
-        return {
-            email: '',
-            password: ''
-        }
-    },
-    methods: {
-        async login () {
-            const data = {
-                email: this.email,
-                password: this.password
-            }
-            const response = await this.$axios.post('/api/users/auth/login', data).catch(err => console.log(err));
+import * as EmailValidator from "email-validator";
 
-            if (!response) return;
-        }
-    }
-}
+export default {
+  name: "AppLoginForm",
+  data() {
+    return {
+      email: "",
+      password: "",
+      validEmail: true,
+      emptyError: false,
+    };
+  },
+  methods: {
+    typingEmail() {
+      if (EmailValidator.validate(this.email)) {
+        this.validEmail = true;
+      }
+    },
+    async login() {
+      const data = {
+        email: this.email,
+        password: this.password,
+      };
+
+      if (!this.email || !this.password) {
+        this.emptyError = true;
+        return this.$toast.error("Please fill all fields!");
+      }
+
+      if (!EmailValidator.validate(this.email)) {
+        this.validEmail = false;
+        return this.$toast.error("Email is invalid!");
+      }
+
+      const response = await this.$axios.post("/users/auth/login", data);
+
+      if (!response.data.success) {
+        return this.$toast.error(response.data.message);
+      }
+
+      this.$store.commit("setUserData", response.data.data.user);
+
+      this.$cookies.set("cms-auth", response.data.data.token, {
+        path: "/",
+        maxAge: 60 * 60 * 24 * 7,
+      });
+
+      this.$cookies.set("cms-user", JSON.stringify(response.data.data.user), {
+        path: "/",
+        maxAge: 60 * 60 * 24 * 7,
+      });
+
+      this.$router.push(this.localePath("/"));
+    },
+  },
+};
 </script>
 
 <style>
@@ -88,31 +158,40 @@ export default {
   position: absolute;
   right: 0;
 }
+.contact-form h2 {
+  color: #1f365c;
+  margin-bottom: 30px;
+  font-weight: 700;
+  font-size: 26px;
+  line-height: 1;
+}
 .contact-form-area .section-title h2 {
-    color: #222;
-    font-size: 36px;
-    font-weight: 600;
-    line-height: 43.2px;
-    padding: 0 0 30px;
-    text-align: center;
+  max-width: 600px;
+  color: #212529;
+  font-size: 35px;
+  font-weight: 800;
+  letter-spacing: -1px;
+  line-height: 42px;
+  text-align: left;
+  margin-top: 10px;
+  margin-right: auto;
+  margin-bottom: 15px;
+  margin-left: auto;
+  text-align: center;
 }
-.contact-form-area .section-title .seprator img {
-    width: 70px;
-    margin-top: 5px;
-    margin-bottom: 20px;
-}
+
 .contact-form-area h2 {
-    font-size: 35px;
-    font-weight: 600;
-    margin-top: 0;
-    line-height: 1.2;
-    color:var(--main-color);
-    margin-bottom: 0;
+  font-size: 35px;
+  font-weight: 600;
+  margin-top: 0;
+  line-height: 1.2;
+  color: #212529;
+  margin-bottom: 0;
 }
 .contact-info::before {
-  content: '';
+  content: "";
   position: absolute;
-  opacity: .1;
+  opacity: 0.1;
   z-index: -1;
   top: 0;
   left: 0;
@@ -125,18 +204,17 @@ export default {
   background-repeat: no-repeat;
 }
 .contact-form-area .contact-info {
-    margin-bottom: 30px;
-     background: rgb(0,0,0);
-background: linear-gradient(135deg, rgba(0,0,0,0.9205882181974352) 0%, rgba(48,164,108,1) 100%); 
-    padding: 52px 35px 22px;
-    border-radius: 0px;
-    position: relative;
-    z-index: 1;
+  margin-bottom: 30px;
+  background-color: var(--main-color);
+  padding: 52px 35px 22px;
+  border-radius: 12px;
+  position: relative;
+  z-index: 1;
 }
 .contact-form-area .contact-info span {
-    color: var(--main-color);
-    display: block;
-    margin-bottom: 5px;
+  color: #fff;
+  display: block;
+  margin-bottom: 5px;
 }
 .contact-form-area .contact-info h2 {
   color: #fff;
@@ -162,16 +240,22 @@ background: linear-gradient(135deg, rgba(0,0,0,0.9205882181974352) 0%, rgba(48,1
   width: 45px;
   height: 45px;
   line-height: 45px;
-  background-color: transparent;
+  background-color: #fff;
   font-size: 20px;
-  color:#fff;
+  color: var(--main-color);
   border-radius: 50px;
-  border: none;
+  border: 1px solid #fff;
   margin-bottom: 10px;
   text-align: center;
   position: absolute;
   left: 0;
   top: 0;
+}
+.errorHint {
+  color: #ff7675;
+}
+.errorInput {
+  border-color: #ff7675 !important;
 }
 .contact-info ul li .content h3 {
   font-size: 18px;
@@ -186,7 +270,7 @@ background: linear-gradient(135deg, rgba(0,0,0,0.9205882181974352) 0%, rgba(48,1
   font-size: 15px;
 }
 .contact-form .form-group label {
-  color: var(--main-color);
+  color: #212529;
   font-size: 15px;
   margin-bottom: 15px;
   font-weight: 500;
@@ -196,7 +280,7 @@ background: linear-gradient(135deg, rgba(0,0,0,0.9205882181974352) 0%, rgba(48,1
 }
 .contact-form .form-group .form-control {
   height: 50px;
-  color: var(--main-color);
+  color: #212529;
   border: 1px solid var(--main-color);
   background-color: #fff;
   font-size: 15px;
@@ -218,7 +302,7 @@ background: linear-gradient(135deg, rgba(0,0,0,0.9205882181974352) 0%, rgba(48,1
   top: 5px;
   left: 0;
   width: auto;
-height: auto;
+  height: auto;
 }
 .contact-form .agree-label label {
   font-weight: 500;
@@ -226,20 +310,20 @@ height: auto;
   margin-left: 25px;
 }
 .contact-form .agree-label label a,
-.contact-form  a {
+.contact-form a {
   color: var(--main-color);
 }
 
-.contact-form .default-btn, .contact-form .default-btn:hover {
+.contact-form .default-btn,
+.contact-form .default-btn:hover {
   background-color: var(--main-color);
-  border-radius: 3px;
+  border-radius: 25px;
   color: #fff;
   padding: 10px 16px;
   font-weight: bold;
   border: none;
 }
-
 button {
-    margin-bottom: 10px;
+  margin-bottom: 10px;
 }
 </style>

@@ -50,12 +50,21 @@
               >Projects</b-nav-item
             >
             <b-nav-item active-class="active" :to="localePath('/blogs')"
-              >News & articles</b-nav-item
+              >News</b-nav-item
+            >
+            <b-nav-item active-class="active" :to="localePath('/careers')"
+              >Career</b-nav-item
+            >
+            <b-nav-item active-class="active" :to="localePath('/events')"
+              >Events</b-nav-item
             >
             <b-nav-item active-class="active" :to="localePath('/contact')"
               >Contact</b-nav-item
             >
           </b-navbar-nav>
+          <div class="logout" @click="logout">
+            <i class="fa-regular fa-right-from-bracket"></i>
+          </div>
         </b-collapse>
       </b-navbar>
     </div>
@@ -79,6 +88,12 @@ export default {
   },
   mounted() {},
   methods: {
+    logout() {
+      this.$store.commit("setUserData", null);
+      this.$cookies.remove("cms-auth");
+      this.$cookies.remove("cms-user");
+      window.location.href = "/login";
+    },
     handleScroll() {
       if (window.pageYOffset > 30) {
         if (this.topOfPage) this.topOfPage = false;
@@ -96,6 +111,17 @@ header {
   right: 0;
   z-index: 10;
   background-image: linear-gradient(180deg, #00000080 0%, #00000000 100%);
+}
+.logout {
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  background-color: var(--main-color);
+  color: #fff;
+  display: grid;
+  place-items: center;
+  font-size: 1.2rem;
+  cursor: pointer;
 }
 .onScroll {
   position: fixed;
