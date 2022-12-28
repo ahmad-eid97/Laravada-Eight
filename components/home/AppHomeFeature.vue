@@ -43,6 +43,9 @@ export default {
 }
 .features .item {
   text-align: center;
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
 }
 .features .item i {
   color: rgb(48, 164, 108);

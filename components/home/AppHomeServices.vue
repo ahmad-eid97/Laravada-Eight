@@ -10,7 +10,7 @@
         class="col-md-12 col-lg-6 mb-5"
       >
         <div class="item">
-          <div class="row m-0 justify-content-center">
+          <div class="row m-0 justify-content-center align-items-center">
             <div class="col-auto">
               <div class="image">
                 <img :src="service.image" :alt="service.title" />
@@ -58,16 +58,15 @@ export default {
   width: 220px;
   height: 220px;
   border-radius: 50%;
-}
-.services .item .image {
-  width: 220px;
-  height: 220px;
-  border-radius: 50%;
   position: relative;
   overflow: hidden;
+  display: grid;
+  place-items: center;
 }
 .services .item .image img {
   max-height: 100%;
+  width: 100px;
+  object-fit: contain;
 }
 .services .item .image:after {
   content: "";
