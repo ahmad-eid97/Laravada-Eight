@@ -26,19 +26,29 @@
           />
         </b-navbar-brand>
 
-        <b-navbar-toggle target="navbar-toggle-collapse">
-          <template #default="{ expanded }">
-            <span
-              class="menu-trigger"
-              :class="expanded ? 'active' : ''"
-              id="menu03"
-            >
-              <p></p>
-              <p></p>
-              <p></p>
-            </span>
-          </template>
-        </b-navbar-toggle>
+        <div class="d-flex align-items-center gap-3 smallScr">
+          <lang-switch></lang-switch>
+          <div class="m-0 cartIcon" @click="openCart = !openCart">
+            <span>{{ $store.state.cartItems.length }}</span>
+            <i class="fa-regular fa-cart-plus"></i>
+          </div>
+          <div v-if="$store.state.user" class="logout" @click="logout">
+            <i class="fa-regular fa-right-from-bracket"></i>
+          </div>
+          <b-navbar-toggle target="navbar-toggle-collapse">
+            <template #default="{ expanded }">
+              <span
+                class="menu-trigger"
+                :class="expanded ? 'active' : ''"
+                id="menu03"
+              >
+                <p></p>
+                <p></p>
+                <p></p>
+              </span>
+            </template>
+          </b-navbar-toggle>
+        </div>
 
         <b-collapse
           id="navbar-toggle-collapse"
@@ -73,14 +83,24 @@
             <b-nav-item active-class="active" :to="localePath('/contact')"
               >Contact</b-nav-item
             >
+            <b-nav-item
+              active-class="active"
+              :to="localePath('/login')"
+              v-if="$store.state.user"
+              @click="logout"
+              >Logout</b-nav-item
+            >
+
+            <div class="d-flex align-items-center gap-3 largeScr">
+              <div class="m-0 cartIcon" @click="openCart = !openCart">
+                <span>{{ $store.state.cartItems.length }}</span>
+                <i class="fa-regular fa-cart-plus"></i>
+              </div>
+              <div v-if="$store.state.user" class="logout" @click="logout">
+                <i class="fa-regular fa-right-from-bracket"></i>
+              </div>
+            </div>
           </b-navbar-nav>
-          <div class="m-0 cartIcon" @click="openCart = !openCart">
-            <span>{{ $store.state.cartItems.length }}</span>
-            <i class="fa-regular fa-cart-plus"></i>
-          </div>
-          <div v-if="$store.state.user" class="logout" @click="logout">
-            <i class="fa-regular fa-right-from-bracket"></i>
-          </div>
         </b-collapse>
       </b-navbar>
     </div>
@@ -88,6 +108,7 @@
 </template>
 
 <script>
+import LangSwitch from "../langSwitch/langSwitch.vue";
 import cart from "../cart/cart.vue";
 import AppTopBar from "./AppTopBar.vue";
 export default {
@@ -95,6 +116,7 @@ export default {
   components: {
     AppTopBar,
     cart,
+    LangSwitch,
   },
   data() {
     return {
@@ -193,6 +215,9 @@ header {
     &.opened {
       transform: translateX(0);
     }
+    @include xs {
+      width: 350px;
+    }
   }
   .cartIcon {
     border: 1px solid #fff;
@@ -215,9 +240,17 @@ header {
       display: grid;
       place-content: center;
       font-size: 1.2rem;
+      @include sm {
+        font-size: 1rem;
+      }
     }
     i {
       color: #fff;
+    }
+    @include sm {
+      width: 40px;
+      height: 40px;
+      margin: 0 10px !important;
     }
     &:hover {
       background-color: var(--main-color);
@@ -237,7 +270,25 @@ header {
   display: grid;
   place-items: center;
   font-size: 1.2rem;
+  margin: 0 15px !important;
   cursor: pointer;
+  @include md {
+    display: none;
+  }
+}
+.smallScr {
+  align-items: center;
+  display: none !important;
+  @include md {
+    display: flex !important;
+  }
+}
+.largeScr {
+  align-items: center;
+  display: flex !important;
+  @include md {
+    display: none !important;
+  }
 }
 .onScroll {
   position: fixed;
@@ -260,6 +311,9 @@ header {
 }
 .onScroll .social-icon {
   display: none;
+}
+.navbar-toggler {
+  margin: 0;
 }
 .onScroll .cartIcon {
   border: 1px solid var(--main-color);
@@ -286,6 +340,11 @@ nav {
 }
 .onScroll .navbar-brand {
   width: 70px;
+}
+.navbar {
+  @include sm {
+    padding: 20px !important;
+  }
 }
 .navbar .nav-item {
   padding: 0 16px;
