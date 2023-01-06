@@ -19,11 +19,7 @@
       <app-top-bar class="col-12 topBar"></app-top-bar>
       <b-navbar toggleable="lg">
         <b-navbar-brand :href="localePath('/')">
-          <img
-            src="/assets/images/logo.png"
-            alt="logoImage"
-            style="maxwidth: 200px !important"
-          />
+          <img src="/assets/images/logo.png" alt="logoImage" />
         </b-navbar-brand>
 
         <div class="d-flex align-items-center gap-3 smallScr">
@@ -370,11 +366,14 @@ nav {
   padding: 0 60px 0 !important;
 }
 .navbar-brand {
-  width: 100px;
+  width: 150px;
   transition: all 0.3s linear;
+  @include xs {
+    width: 110px;
+  }
 }
 .onScroll .navbar-brand {
-  width: 70px;
+  width: 120px;
 }
 .navbar {
   @include sm {

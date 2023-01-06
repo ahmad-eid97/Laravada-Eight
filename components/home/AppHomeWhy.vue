@@ -25,21 +25,17 @@
           </div>
         </div>
       </div>
-      <div class="col-lg-4">
+      <div class="col-lg-4" v-for="member in team" :key="member.id">
         <div class="founder">
           <div class="image">
-            <img
-              src="https://the7.io/elementor-business/wp-content/uploads/sites/89/elementor/thumbs/3-2-1-oog1pthotm2l1rtpd9yemm3n1pzowgm9h0mcd4ekqw.jpg"
-              alt=""
-            />
+            <img :src="member.image" alt="member image" />
           </div>
           <p>
-            “Thoughts are things! And powerful things at that, when mixed with
-            definiteness of purpose, and burning desire, can be translated into
-            riches.”
+            {{ member.description.substring(0, 200) }}
+            {{ member.description.length > 200 ? "..." : "" }}
           </p>
-          <h4>Alexandra Blackfire</h4>
-          <h5>Co-founder, CEO</h5>
+          <h4>{{ member.name }}</h4>
+          <h5>{{ member.job }}</h5>
         </div>
       </div>
     </div>
@@ -49,7 +45,7 @@
 <script>
 export default {
   name: "AppHometestimonials",
-  props: ["whyUs"],
+  props: ["whyUs", "team"],
   components: {},
   data() {
     return {

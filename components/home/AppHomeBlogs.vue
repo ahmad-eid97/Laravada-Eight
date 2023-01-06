@@ -112,10 +112,7 @@ export default {
   right: 0;
   bottom: 0;
   z-index: 1;
-  background-image: linear-gradient(
-    rgba(0, 0, 0, 0) 0%,
-    rgba(0, 0, 0, 0.5) 100%
-  );
+  background-image: linear-gradient(rgba(0, 0, 0, 0) 0%, rgba(0, 0, 0, 0) 100%);
   opacity: 0;
   transition: all 0.3s linear;
 }

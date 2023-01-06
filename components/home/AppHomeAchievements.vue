@@ -8,9 +8,12 @@
           the ones that do.
         </p>
         <div class="form">
-          <div class="row m-0" v-if="counter.find(
-                (one) => one.key === 'counter_success_list'
-              ).value">
+          <div
+            class="row m-0"
+            v-if="
+              counter.find((one) => one.key === 'counter_success_list').value
+            "
+          >
             <div
               v-for="item in counter.find(
                 (one) => one.key === 'counter_success_list'
@@ -20,8 +23,8 @@
               style="padding-left: 0"
             >
               <div class="row m-0">
-                <div class="col-auto p-0">
-                  <i :class="item.title"></i>
+                <div class="col-auto p-0 icono">
+                  <i :class="item.icon"></i>
                 </div>
                 <div class="col" style="padding-left: 0">
                   <h4>{{ item.counter }}+</h4>
@@ -151,6 +154,9 @@ export default {
   transition: all 0.3s linear;
   justify-content: center;
   border: none;
+}
+.icono i {
+  margin-top: 20px !important;
 }
 .achievements .btn i {
   margin-right: 12px;

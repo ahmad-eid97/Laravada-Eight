@@ -11,7 +11,7 @@
     <app-home-principles></app-home-principles>
     <app-home-cases></app-home-cases>
     <app-home-achievements :counter="counter"></app-home-achievements>
-    <app-home-why :whyUs="whyUs"></app-home-why>
+    <app-home-why :whyUs="whyUs" :team="team"></app-home-why>
     <app-home-blogs :blogs="blogs"></app-home-blogs>
     <app-home-contact-divider-bottom
       :bottomBanner="bottomBanner"
@@ -80,6 +80,8 @@ export default {
       },
     });
 
+    const TEAM = await $axios.get("/teams");
+
     return {
       sliderData: sliderData.data.data.sliders,
       features: features.data.data,
@@ -88,6 +90,7 @@ export default {
       services: services.data.data.services,
       blogs: blogs.data.data.blogs,
       bottomBanner: bottomBanner.data.data,
+      team: TEAM.data.data.teams.slice(0, 1),
     };
   },
   components: {

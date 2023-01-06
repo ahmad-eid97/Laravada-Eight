@@ -78,7 +78,7 @@ export default {
   z-index: 1;
   background-image: linear-gradient(
     rgba(0, 0, 0, 0) 0%,
-    rgba(0, 0, 0, 0.5) 100%
+    rgba(0, 0, 0, 0.2) 100%
   );
   opacity: 0;
   transition: all 0.3s linear;
