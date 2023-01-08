@@ -7,50 +7,21 @@
       :focusOnSelect="true"
       :dots="false"
     >
-      <div class="item item-1">
+      <div
+        class="item item-1"
+        v-for="slide in slides"
+        :key="slide.id"
+        :style="{ background: `url(${slide.background})` }"
+      >
         <div class="overlay"></div>
         <div class="content">
-          <h1>Networks & Communications</h1>
+          <h1>
+            {{ slide.title }}
+          </h1>
           <p>
-            Class aptent litora torquent per inceptos himenaeos - tellus at
-            euismod lorem ipsum dolor. Morbi dapibus glavrida ipsum dolor at
-            euismod amet.
+            {{ slide.description }}
           </p>
-          <a href="#" class="btn"> View details </a>
-        </div>
-      </div>
-      <div class="item item-2">
-        <div class="overlay"></div>
-        <div class="content">
-          <h1>Accounting Services</h1>
-          <p>
-            Ut sit amet semper arcu? Proin eget ex viverra lorem pretium. Morbi
-            dapibus a tellus at euismod. Ut dolor amet sit amet semper!
-          </p>
-          <a href="#" class="btn"> View details </a>
-        </div>
-      </div>
-      <div class="item item-3">
-        <div class="overlay"></div>
-        <div class="content">
-          <h1>Project Management</h1>
-          <p>
-            Class aptent litora torquent per inceptos himenaeos - tellus at
-            euismod lorem ipsum dolor. Morbi dapibus glavrida ipsum dolor at
-            euismod amet.
-          </p>
-          <a href="#" class="btn"> View details </a>
-        </div>
-      </div>
-      <div class="item item-4">
-        <div class="overlay"></div>
-        <div class="content">
-          <h1>B2B Solutions</h1>
-          <p>
-            Etiam mollis libero vitae pulvinar bibendum. Morbi convallis metus
-            eros, semper pharetra massa efficitur auctor nulla amet ipsum.
-          </p>
-          <a href="#" class="btn"> View details </a>
+          <a :href="slide.link" class="btn">Learn More</a>
         </div>
       </div>
     </VueSlickCarousel>
@@ -65,7 +36,7 @@ import "vue-slick-carousel/dist/vue-slick-carousel-theme.css";
 export default {
   name: "AppHomeSlider",
   components: { VueSlickCarousel },
-  props: ["sliderData"],
+  props: ["slides"],
   data() {
     return {
       c1: undefined,
@@ -84,23 +55,8 @@ export default {
   min-height: 100vh;
   position: relative;
 }
-.intro .slick-slide .item-1 {
-  background-image: url(//the7.io/elementor-business/wp-content/uploads/sites/89/2020/01/img001-8-1.jpg\\);
-  background-size: cover;
-  background-position: 0;
-}
-.intro .slick-slide .item-2 {
-  background-image: url(//the7.io/elementor-business/wp-content/uploads/sites/89/2020/02/img001-1-1.jpg);
-  background-size: cover;
-  background-position: 0;
-}
-.intro .slick-slide .item-3 {
-  background-image: url(//the7.io/elementor-business/wp-content/uploads/sites/89/2020/02/img001-6-1.jpg);
-  background-size: cover;
-  background-position: 0;
-}
-.intro .slick-slide .item-4 {
-  background-image: url(//the7.io/elementor-business/wp-content/uploads/sites/89/2020/02/img001-25-1.jpg);
+.intro .slick-slide .item {
+  /* background-image: url(//the7.io/elementor-business/wp-content/uploads/sites/89/2020/01/img001-8-1.jpg\\); */
   background-size: cover;
   background-position: 0;
 }
