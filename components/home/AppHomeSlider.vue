@@ -57,7 +57,7 @@ export default {
 }
 .intro .slick-slide .item {
   /* background-image: url(//the7.io/elementor-business/wp-content/uploads/sites/89/2020/01/img001-8-1.jpg\\); */
-  background-size: cover;
+  background-size: cover !important;
   background-position: 0;
 }
 .intro .slick-slide .item .overlay {
