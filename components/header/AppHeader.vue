@@ -52,52 +52,46 @@
           is-nav
         >
           <b-navbar-nav class="align-items-center">
-            <b-nav-item active-class="active" :to="localePath('/')" exact
-              >Home</b-nav-item
-            >
-            <b-nav-item active-class="active" :to="localePath('/about')"
-              >About</b-nav-item
-            >
-            <b-nav-item active-class="active" :to="localePath('/team')"
-              >Team</b-nav-item
-            >
-            <b-nav-item active-class="active" :to="localePath('/services')"
-              >Services</b-nav-item
-            >
-            <b-nav-item active-class="active" :to="localePath('/testimonials')"
-              >Projects</b-nav-item
-            >
-            <b-nav-item active-class="active" :to="localePath('/blogs')"
-              >News</b-nav-item
-            >
-            <b-nav-item active-class="active" :to="localePath('/careers')"
-              >Career</b-nav-item
-            >
-            <b-nav-item active-class="active" :to="localePath('/events')"
-              >Events</b-nav-item
-            >
-            <b-nav-item active-class="active" :to="localePath('/contact')"
-              >Contact</b-nav-item
-            >
             <b-nav-item
               active-class="active"
-              :to="localePath('/login')"
+              :to="localePath(`/${item.link}`)"
+              exact
+              v-for="item in $store.state.topMenu"
+              :key="item.id"
+            >
+              <span v-if="!item.child.length">{{ item.label }}</span>
+
+              <b-dropdown
+                :text="item.label"
+                block
+                class="m-2 dropdownBtn"
+                v-if="item.child.length"
+              >
+                <b-dropdown-item
+                  v-for="child in item.child"
+                  :key="child.id"
+                  :to="localePath('/' + child.link)"
+                  >{{ child.label }}</b-dropdown-item
+                >
+              </b-dropdown>
+            </b-nav-item>
+            <b-nav-item
               v-if="$store.state.user"
               @click="logout"
               class="outLarge"
-              >Logout</b-nav-item
             >
-
-            <div class="d-flex align-items-center gap-3 largeScr">
-              <div class="m-0 cartIcon" @click="openCart = !openCart">
-                <span>{{ $store.state.cartItems.length }}</span>
-                <i class="fa-regular fa-cart-plus"></i>
-              </div>
-              <div v-if="$store.state.user" class="logout" @click="logout">
-                <i class="fa-regular fa-right-from-bracket"></i>
-              </div>
-            </div>
+              Logout
+            </b-nav-item>
           </b-navbar-nav>
+          <div class="d-flex align-items-center gap-3 largeScr">
+            <div class="m-0 cartIcon" @click="openCart = !openCart">
+              <span>{{ $store.state.cartItems.length }}</span>
+              <i class="fa-regular fa-cart-plus"></i>
+            </div>
+            <div v-if="$store.state.user" class="logout" @click="logout">
+              <i class="fa-regular fa-right-from-bracket"></i>
+            </div>
+          </div>
         </b-collapse>
       </b-navbar>
     </div>
@@ -382,6 +376,12 @@ nav {
 }
 .navbar .nav-item {
   padding: 0 16px;
+  & > .dropdown {
+    display: none;
+  }
+}
+.onScroll .navbar .nav-item .dropdownBtn button {
+  color: #000;
 }
 .navbar .nav-item .nav-link {
   color: #fff;
@@ -440,6 +440,25 @@ button {
   }
   .navbar-nav li.nav-item a {
     color: var(--main-color) !important;
+  }
+}
+.dropdownBtn {
+  margin: 0 !important;
+  button {
+    background: none !important;
+    padding: 0 !important;
+    text-transform: none !important;
+    font-size: 1.1rem !important;
+    font-family: unset !important;
+    font-weight: 500 !important;
+    box-shadow: none !important;
+    border: none !important;
+    min-width: 60px !important;
+    position: relative;
+    top: -3px;
+  }
+  .dropdown-menu {
+    top: 40px !important;
   }
 }
 </style>
