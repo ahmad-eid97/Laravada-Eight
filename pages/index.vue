@@ -9,9 +9,10 @@
     <app-home-services :services="services"></app-home-services>
     <app-home-contact-divider></app-home-contact-divider>
     <app-home-principles></app-home-principles>
-    <app-home-cases></app-home-cases>
+    <app-home-cases :activities="activities"></app-home-cases>
     <app-home-achievements :counter="counter"></app-home-achievements>
     <app-home-why :whyUs="whyUs" :team="team"></app-home-why>
+    <app-home-steps :steps="steps" />
     <app-home-blogs :blogs="blogs"></app-home-blogs>
     <app-home-contact-divider-bottom
       :bottomBanner="bottomBanner"
@@ -45,6 +46,7 @@ import AppHomeServices from "../components/home/AppHomeServices.vue";
 import AppHomeSlider from "../components/home/AppHomeSlider.vue";
 // import AppHomeTestimonials from '../components/home/AppHomeTestimonials.vue'
 import AppHomeWhy from "../components/home/AppHomeWhy.vue";
+import AppHomeSteps from "../components/home/AppHomeSteps.vue";
 // @ is an alias to /src
 
 export default {
@@ -86,6 +88,18 @@ export default {
 
     const TEAM = await $axios.get("/teams");
 
+    const activities = await $axios.get("/sections/activities", {
+      headers: {
+        "Accept-Language": app.i18n.locale,
+      },
+    });
+
+    const steps = await $axios.get("/sections/steps", {
+      headers: {
+        "Accept-Language": app.i18n.locale,
+      },
+    });
+
     return {
       slides: slides.data.data.sliders,
       features: features.data.data,
@@ -95,6 +109,8 @@ export default {
       blogs: blogs.data.data.blogs,
       bottomBanner: bottomBanner.data.data,
       team: TEAM.data.data.teams.slice(0, 1),
+      activities: activities.data.data,
+      steps: steps.data.data,
     };
   },
   components: {
@@ -111,6 +127,7 @@ export default {
     AppHomeCases,
     AppHomeAchievements,
     AppHomeContactDividerBottom,
+    AppHomeSteps,
   },
 };
 </script>

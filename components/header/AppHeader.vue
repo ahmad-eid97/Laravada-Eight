@@ -441,9 +441,18 @@ button {
   .navbar-nav li.nav-item a {
     color: var(--main-color) !important;
   }
+  .dropdownBtn {
+    button {
+      color: var(--main-color);
+      &:hover {
+        color: var(--main-color);
+      }
+    }
+  }
 }
 .dropdownBtn {
   margin: 0 !important;
+  width: 100%;
   button {
     background: none !important;
     padding: 0 !important;
@@ -453,7 +462,8 @@ button {
     font-weight: 500 !important;
     box-shadow: none !important;
     border: none !important;
-    min-width: 60px !important;
+    min-width: unset !important;
+    width: 100%;
     position: relative;
     top: -3px;
   }
