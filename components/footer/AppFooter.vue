@@ -1,6 +1,7 @@
 <template>
   <div>
     <!-- Footer Style Seven Start -->
+    <subscribe />
     <footer>
       <div class="container">
         <div class="section-content">
@@ -69,9 +70,10 @@
 </template>
 
 <script>
+import Subscribe from "../subscribe/subscribe.vue";
 export default {
   name: "AppFooter",
-  components: {},
+  components: { Subscribe },
   data() {
     return {};
   },
