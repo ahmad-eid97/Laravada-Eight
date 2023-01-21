@@ -29,6 +29,7 @@
 
     <!-- Services Section Start -->
     <!-- <app-home-services-offers></app-home-services-offers> -->
+    <app-home-partners :partners="partners" />
   </div>
 </template>
 
@@ -47,6 +48,7 @@ import AppHomeSlider from "../components/home/AppHomeSlider.vue";
 // import AppHomeTestimonials from '../components/home/AppHomeTestimonials.vue'
 import AppHomeWhy from "../components/home/AppHomeWhy.vue";
 import AppHomeSteps from "../components/home/AppHomeSteps.vue";
+import AppHomePartners from "../components/home/AppHomePartners.vue";
 // @ is an alias to /src
 
 export default {
@@ -100,9 +102,12 @@ export default {
       },
     });
 
+    const partners = await $axios.get("/partners");
+
     return {
       slides: slides.data.data.sliders,
       features: features.data.data,
+      partners: partners.data.data.partners,
       counter: counter.data.data,
       whyUs: whyUs.data.data,
       services: services.data.data.services,
@@ -128,6 +133,7 @@ export default {
     AppHomeAchievements,
     AppHomeContactDividerBottom,
     AppHomeSteps,
+    AppHomePartners,
   },
 };
 </script>
