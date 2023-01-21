@@ -80,7 +80,7 @@ export default {
     rgba(0, 0, 0, 0) 0%,
     rgba(0, 0, 0, 0.2) 100%
   );
-  opacity: 0;
+  opacity: 0.9;
   transition: all 0.3s linear;
 }
 @include xs {
@@ -89,7 +89,9 @@ export default {
   }
 }
 .services .item .image:hover::after {
-  opacity: 0.9;
+  opacity: 0.3;
+  background-image: unset;
+  background-color: var(--main-color);
 }
 
 .services .item h4 {
