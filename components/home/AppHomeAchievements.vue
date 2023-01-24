@@ -51,12 +51,154 @@ export default {
     return {};
   },
   methods: {},
+  mounted() {
+    document
+      .querySelector(".achievements")
+      .style.setProperty(
+        "--counter-bg",
+        this.counter.find(
+          (one) => one.key === "counter_success_background_active_section"
+        ).value === "color"
+          ? this.counter.find(
+              (one) => one.key === "counter_success_background_color_section"
+            ).value
+          : `url(${
+              this.counter.find(
+                (one) => one.key === "counter_success_background_image_section"
+              ).value
+            })`
+      );
+
+    document
+      .querySelector(".achievements")
+      .style.setProperty(
+        "--counter-fontSize",
+        `${
+          this.counter.find(
+            (one) => one.key === "counter_success_font_size_section"
+          ).value
+        }px`
+      );
+
+    if (
+      this.counter.find(
+        (one) => one.key === "counter_success_border_position_section"
+      ) &&
+      this.counter.find(
+        (one) => one.key === "counter_success_border_position_section"
+      ).value === "both"
+    ) {
+      document
+        .querySelector(".achievements")
+        .style.setProperty(
+          "--counter-border-top",
+          `${
+            this.counter.find(
+              (one) => one.key === "counter_success_border_size_section"
+            ).value
+          }px ${
+            this.counter.find(
+              (one) => one.key === "counter_success_border_type_section"
+            ).value
+          } ${
+            this.counter.find(
+              (one) => one.key === "counter_success_border_color_section"
+            ).value
+          }`
+        );
+
+      document
+        .querySelector(".achievements")
+        .style.setProperty(
+          "--counter-border-bottom",
+          `${
+            this.counter.find(
+              (one) => one.key === "counter_success_border_size_section"
+            ).value
+          }px ${
+            this.counter.find(
+              (one) => one.key === "counter_success_border_type_section"
+            ).value
+          } ${
+            this.counter.find(
+              (one) => one.key === "counter_success_border_color_section"
+            ).value
+          }`
+        );
+    } else if (
+      this.counter.find(
+        (one) => one.key === "counter_success_border_position_section"
+      ) &&
+      this.counter.find(
+        (one) => one.key === "counter_success_border_position_section"
+      ).value === "top"
+    ) {
+      document
+        .querySelector(".achievements")
+        .style.setProperty(
+          "--counter-border-top",
+          `${
+            this.counter.find(
+              (one) => one.key === "counter_success_border_size_section"
+            ).value
+          }px ${
+            this.counter.find(
+              (one) => one.key === "counter_success_border_type_section"
+            ).value
+          } ${
+            this.counter.find(
+              (one) => one.key === "counter_success_border_color_section"
+            ).value
+          }`
+        );
+    } else if (
+      this.counter.find(
+        (one) => one.key === "counter_success_border_position_section"
+      ) &&
+      this.counter.find(
+        (one) => one.key === "counter_success_border_position_section"
+      ).value === "bottom"
+    ) {
+      document
+        .querySelector(".achievements")
+        .style.setProperty(
+          "--counter-border-bottom",
+          `${
+            this.counter.find(
+              (one) => one.key === "counter_success_border_size_section"
+            ).value
+          }px ${
+            this.counter.find(
+              (one) => one.key === "counter_success_border_type_section"
+            ).value
+          } ${
+            this.counter.find(
+              (one) => one.key === "counter_success_border_color_section"
+            ).value
+          }`
+        );
+    }
+  },
 };
 </script>
 
 <style lang="scss">
 .achievements {
   background-color: rgb(245, 245, 245);
+
+  --counter-bg: #fff;
+  --counter-fontSize: 20px;
+  --counter-border-top: 0px solid #fff;
+  --counter-border-bottom: 0px solid #fff;
+
+  background: var(--counter-bg);
+  border-top: var(--counter-border-top);
+  border-bottom: var(--counter-border-bottom);
+  background-repeat: no-repeat;
+  background-size: cover;
+  h2 {
+    font-size: var(--counter-fontSize);
+  }
 }
 .achievements .image {
   background-image: url("https://the7.io/elementor-business/wp-content/uploads/sites/89/2020/02/img001-5-1.jpg");

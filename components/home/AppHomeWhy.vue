@@ -54,6 +54,132 @@ export default {
   },
   mounted() {
     this.autoPlay();
+    document
+      .querySelector(".testimonials")
+      .style.setProperty(
+        "--steps-bg",
+        this.whyUs.find(
+          (one) => one.key === "why_choose_us_background_active_section"
+        ).value === "color"
+          ? this.whyUs.find(
+              (one) => one.key === "why_choose_us_background_color_section"
+            ).value
+          : `url(${
+              this.whyUs.find(
+                (one) => one.key === "why_choose_us_background_image_section"
+              ).value
+            })`
+      );
+
+    document
+      .querySelector(".testimonials")
+      .style.setProperty(
+        "--steps-fontSize",
+        `${
+          this.whyUs.find(
+            (one) => one.key === "why_choose_us_font_size_section"
+          ).value
+        }px`
+      );
+
+    if (
+      this.whyUs.find(
+        (one) => one.key === "why_choose_us_border_position_section"
+      ) &&
+      this.whyUs.find(
+        (one) => one.key === "why_choose_us_border_position_section"
+      ).value === "both"
+    ) {
+      document
+        .querySelector(".testimonials")
+        .style.setProperty(
+          "--steps-border-top",
+          `${
+            this.whyUs.find(
+              (one) => one.key === "why_choose_us_border_size_section"
+            ).value
+          }px ${
+            this.whyUs.find(
+              (one) => one.key === "why_choose_us_border_type_section"
+            ).value
+          } ${
+            this.whyUs.find(
+              (one) => one.key === "why_choose_us_border_color_section"
+            ).value
+          }`
+        );
+
+      document
+        .querySelector(".testimonials")
+        .style.setProperty(
+          "--steps-border-bottom",
+          `${
+            this.whyUs.find(
+              (one) => one.key === "why_choose_us_border_size_section"
+            ).value
+          }px ${
+            this.whyUs.find(
+              (one) => one.key === "why_choose_us_border_type_section"
+            ).value
+          } ${
+            this.whyUs.find(
+              (one) => one.key === "why_choose_us_border_color_section"
+            ).value
+          }`
+        );
+    } else if (
+      this.whyUs.find(
+        (one) => one.key === "why_choose_us_border_position_section"
+      ) &&
+      this.whyUs.find(
+        (one) => one.key === "why_choose_us_border_position_section"
+      ).value === "top"
+    ) {
+      document
+        .querySelector(".testimonials")
+        .style.setProperty(
+          "--steps-border-top",
+          `${
+            this.whyUs.find(
+              (one) => one.key === "why_choose_us_border_size_section"
+            ).value
+          }px ${
+            this.whyUs.find(
+              (one) => one.key === "why_choose_us_border_type_section"
+            ).value
+          } ${
+            this.whyUs.find(
+              (one) => one.key === "why_choose_us_border_color_section"
+            ).value
+          }`
+        );
+    } else if (
+      this.whyUs.find(
+        (one) => one.key === "why_choose_us_border_position_section"
+      ) &&
+      this.whyUs.find(
+        (one) => one.key === "why_choose_us_border_position_section"
+      ).value === "bottom"
+    ) {
+      document
+        .querySelector(".testimonials")
+        .style.setProperty(
+          "--steps-border-bottom",
+          `${
+            this.whyUs.find(
+              (one) => one.key === "why_choose_us_border_size_section"
+            ).value
+          }px ${
+            this.whyUs.find(
+              (one) => one.key === "why_choose_us_border_type_section"
+            ).value
+          } ${
+            this.whyUs.find(
+              (one) => one.key === "why_choose_us_border_color_section"
+            ).value
+          }`
+        );
+    }
   },
   methods: {
     autoPlay() {
@@ -72,9 +198,25 @@ export default {
 };
 </script>
 
-<style>
+<style lang="scss">
 .testimonials {
   padding: 90px 30px;
+  --steps-bg: #fff;
+  --steps-fontSize: 20px;
+  --steps-border-top: 0px solid #fff;
+  --steps-border-bottom: 0px solid #fff;
+
+  background: var(--steps-bg);
+  border-top: var(--steps-border-top);
+  border-bottom: var(--steps-border-bottom);
+  background-repeat: no-repeat;
+  background-size: cover;
+  padding: 50px 0 0 0;
+
+  h2 {
+    font-size: var(--steps-fontSize);
+    text-align: center;
+  }
 }
 .testimonials h2 {
   color: rgb(34, 34, 34);
