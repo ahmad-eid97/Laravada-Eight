@@ -4,7 +4,14 @@
       <div class="col-lg-12">
         <ul class="social-icon bordered-theme">
           <li>
-            <span class="tel"> tel. +1111111111 </span>
+            <span class="tel">
+              tel.
+              {{
+                $store.state.websiteSettings.find(
+                  (one) => one.key === "contact_phone"
+                ).plain_value
+              }}
+            </span>
           </li>
           <li>
             <a href="#">

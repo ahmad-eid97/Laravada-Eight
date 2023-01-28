@@ -9,22 +9,37 @@
             <div class="col-sm-4">
               <div class="footer-item footer-widget">
                 <img
-                  src="/assets/images/logo2.png"
+                  :src="
+                    $store.state.websiteSettings.find(
+                      (one) => one.key === 'logo'
+                    ).plain_value
+                  "
                   alt="logoImage"
-                  style="maxwidth: 90%"
+                  style="width: 200px"
                 />
+                <p>
+                  {{
+                    $store.state.websiteSettings.find(
+                      (one) => one.key === "description"
+                    ).plain_value
+                  }}
+                </p>
               </div>
             </div>
 
             <div class="col-sm-4">
               <div class="footer-item">
-                <div class="footer-title">
-                  <h5>Services</h5>
-                </div>
-                <a href="#" class="d-block">B2B Solutions</a>
-                <a href="#" class="d-block">Accounting services</a>
-                <a href="#" class="d-block">Networks & communications</a>
-                <a href="#" class="d-block">Project management</a>
+                <h5>OTHER PAGES</h5>
+                <ul class="footer-list">
+                  <!-- <li><a href="#">About Us</a></li> -->
+                  <li v-for="page in $store.state.footerPages" :key="page.id">
+                    <b-nav-item
+                      :to="localePath(generatePagePath(page.id))"
+                      v-if="page.status"
+                      >{{ page.name }}</b-nav-item
+                    >
+                  </li>
+                </ul>
               </div>
             </div>
 
@@ -42,16 +57,21 @@
                   }}
                 </a>
                 <a href="#">
-                  <i class="fa-regular fa-clock"></i>
-                  Mon – Fri: 10 am – 8 pm
-                </a>
-                <a href="#">
                   <i class="fa-solid fa-phone"></i>
-                  (001) 234 56 78
+
+                  {{
+                    $store.state.websiteSettings.find(
+                      (one) => one.key === "contact_phone"
+                    ).plain_value
+                  }}
                 </a>
                 <a href="#">
                   <i class="fa-solid fa-location-dot"></i>
-                  New York, USA
+                  {{
+                    $store.state.websiteSettings.find(
+                      (one) => one.key === "contact_address"
+                    ).plain_value
+                  }}
                 </a>
               </div>
             </div>
@@ -78,7 +98,20 @@ export default {
     return {};
   },
   beforeMount() {},
-  methods: {},
+  methods: {
+    generatePagePath(id) {
+      switch (id) {
+        case 1:
+          return "/about";
+        case 2:
+          return "/contact";
+        case 3:
+          return "/terms";
+        case 4:
+          return "/policy";
+      }
+    },
+  },
 };
 </script>
 <style>
