@@ -13,22 +13,10 @@
               }}
             </span>
           </li>
-          <li>
-            <a href="#">
-              <i class="fa-brands fa-facebook-f"></i>
-            </a>
-          </li>
-          <li>
-            <a href="#"><i class="fa-brands fa-twitter"></i> </a>
-          </li>
-          <li>
-            <a href="#"><i class="fa-brands fa-linkedin-in"></i> </a>
-          </li>
-          <li>
-            <a href="#"><i class="fa-solid fa-wifi"></i> </a>
-          </li>
-          <li>
-            <a href="#"><i class="fa-brands fa-youtube"></i> </a>
+          <li v-for="link in $store.state.socialLinks" :key="link.key">
+            <span class="link">
+              <i :class="link.icon"></i>
+            </span>
           </li>
           <lang-switch></lang-switch>
         </ul>
@@ -74,7 +62,7 @@ export default {
   font-weight: 400;
   line-height: 18.2px;
 }
-.top-bar .social-icon li a {
+.top-bar .social-icon li span.link {
   display: block;
   background-color: rgb(48, 164, 108);
   border-radius: 3px;
