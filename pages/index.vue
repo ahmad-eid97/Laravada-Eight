@@ -3,20 +3,31 @@
     <!-- Slick Section Start -->
     <app-home-slider :slides="slides"></app-home-slider>
     <!-- Slick Section End -->
-
-    <app-home-feature :features="features"></app-home-feature>
+    <div v-if="features.status">
+      <app-home-feature :features="features.data"></app-home-feature>
+    </div>
 
     <app-home-services :services="services"></app-home-services>
     <app-home-contact-divider></app-home-contact-divider>
     <app-home-principles></app-home-principles>
-    <app-home-cases :activities="activities"></app-home-cases>
-    <app-home-achievements :counter="counter"></app-home-achievements>
-    <app-home-why :whyUs="whyUs" :team="team"></app-home-why>
-    <app-home-steps :steps="steps" />
+    <div v-if="activities.status">
+      <app-home-cases :activities="activities.data"></app-home-cases>
+    </div>
+    <div v-if="counter.status">
+      <app-home-achievements :counter="counter.data"></app-home-achievements>
+    </div>
+    <div v-if="whyUs.status">
+      <app-home-why :whyUs="whyUs.data" :team="team"></app-home-why>
+    </div>
+    <div v-if="steps.status">
+      <app-home-steps :steps="steps.data" />
+    </div>
     <app-home-blogs :blogs="blogs"></app-home-blogs>
-    <app-home-contact-divider-bottom
-      :bottomBanner="bottomBanner"
-    ></app-home-contact-divider-bottom>
+    <div v-if="bottomBanner.status">
+      <app-home-contact-divider-bottom
+        :bottomBanner="bottomBanner.data"
+      ></app-home-contact-divider-bottom>
+    </div>
     <!-- <app-home-testimonials></app-home-testimonials> -->
 
     <!-- WHY WORK WITH US Start -->
@@ -170,16 +181,16 @@ export default {
 
     return {
       slides: slides.data.data.sliders,
-      features: features.data.data,
+      features: features.data,
       partners: partners.data.data.partners,
-      counter: counter.data.data,
-      whyUs: whyUs.data.data,
+      counter: counter.data,
+      whyUs: whyUs.data,
       services: services.data.data.services,
       blogs: blogs.data.data.blogs,
-      bottomBanner: bottomBanner.data.data,
+      bottomBanner: bottomBanner.data,
       team: TEAM.data.data.teams.slice(0, 1),
-      activities: activities.data.data,
-      steps: steps.data.data,
+      activities: activities.data,
+      steps: steps.data,
     };
   },
   components: {
