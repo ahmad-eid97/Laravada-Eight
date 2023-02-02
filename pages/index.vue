@@ -3,27 +3,27 @@
     <!-- Slick Section Start -->
     <app-home-slider :slides="slides"></app-home-slider>
     <!-- Slick Section End -->
-    <div v-if="features.status">
+    <div v-if="$store.state.sectionsStatus.features">
       <app-home-feature :features="features.data"></app-home-feature>
     </div>
 
     <app-home-services :services="services"></app-home-services>
     <app-home-contact-divider></app-home-contact-divider>
     <app-home-principles></app-home-principles>
-    <div v-if="activities.status">
+    <div v-if="$store.state.sectionsStatus.activities">
       <app-home-cases :activities="activities.data"></app-home-cases>
     </div>
-    <div v-if="counter.status">
+    <div v-if="$store.state.sectionsStatus.counter_success">
       <app-home-achievements :counter="counter.data"></app-home-achievements>
     </div>
-    <div v-if="whyUs.status">
+    <div v-if="$store.state.sectionsStatus.why_choose_us">
       <app-home-why :whyUs="whyUs.data" :team="team"></app-home-why>
     </div>
-    <div v-if="steps.status">
+    <div v-if="$store.state.sectionsStatus.steps">
       <app-home-steps :steps="steps.data" />
     </div>
     <app-home-blogs :blogs="blogs"></app-home-blogs>
-    <div v-if="bottomBanner.status">
+    <div v-if="$store.state.sectionsStatus['banner-bottom']">
       <app-home-contact-divider-bottom
         :bottomBanner="bottomBanner.data"
       ></app-home-contact-divider-bottom>
